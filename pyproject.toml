@@ -63,6 +63,11 @@ test = [
     "aiohttp<3.13",
 ]
 dev = ["ruff"]
+# Opt-in coordinator backend (optimization_backend = dantzig_wolfe). Points at the
+# branch under test until home-energy-optimizer is released on PyPI.
+federated = [
+    "home-energy-optimizer @ git+https://github.com/ameetdesh/home-energy-optimizer.git@federated-participants",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -78,6 +83,10 @@ emhass = { workspace = true }
 default-groups = "all"
 package = true
 override-dependencies = ["yarl<1.24"]
+
+# Only for the git URL in the federated extra; goes with the PyPI release.
+[tool.hatch.metadata]
+allow-direct-references = true
 
 [tool.hatch.version]
 path = "src/emhass/__init__.py"
